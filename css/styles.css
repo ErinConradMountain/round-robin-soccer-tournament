@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+input, button, select {
+    margin: 5px 0;
+    padding: 5px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+.match-result {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.match-result.team1-win {
+    border-left: 5px solid #4CAF50;
+}
+.match-result.team2-win {
+    border-left: 5px solid #2196F3;
+}
+.match-result.draw {
+    border-left: 5px solid #FFC107;
+}
+.score-input {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+.score-input input {
+    width: 40px;
+    text-align: center;
+}
+.score-input span {
+    margin: 0 10px;
+}
+.points {
+    font-weight: bold;
+    margin-left: 10px;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+#teamFilter {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+}

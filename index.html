@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round Robin Soccer Tournament</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Round Robin Soccer Tournament</h1>
+    
+    <h2>Team Registration</h2>
+    <input type="text" id="teamName" placeholder="Enter team name">
+    <button onclick="addTeam()">Add Team</button>
+    <ul id="teamList"></ul>
+    
+    <h2>Matches</h2>
+    <div id="matches"></div>
+    
+    <h2>Match Results</h2>
+    <select id="teamFilter" onchange="filterMatches()">
+        <option value="">All Teams</option>
+    </select>
+    <div id="matchResults"></div>
+    
+    <h2>Scoreboard</h2>
+    <table id="scoreboard">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Played</th>
+                <th>Goal Wins</th>
+                <th>Corner Wins</th>
+                <th>Drawn</th>
+                <th>Lost</th>
+                <th>Goals For</th>
+                <th>Goals Against</th>
+                <th>Goal Difference</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <h2>Positions</h2>
+    <div id="positions"></div>
+    
+    <h2>Final</h2>
+    <div id="final"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
