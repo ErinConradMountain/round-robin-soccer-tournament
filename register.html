@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Registration</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="register.html">Register Teams</a> |
+      <a href="matches.html">Matches</a> |
+      <a href="scoreboard.html">Scoreboard</a>
+    </nav>
+    <h1>Round Robin Soccer Tournament</h1>
+
+    <h2>Team Registration</h2>
+    <input type="text" id="teamName" placeholder="Enter team name" />
+    <button onclick="addTeam()">Add Team</button>
+    <ul id="teamList"></ul>
+
+    <script src="js/script.js"></script>
+    <script>
+      $(document).ready(function () {
+        loadData();
+        displayTeams();
+      });
+    </script>
+  </body>
+</html>

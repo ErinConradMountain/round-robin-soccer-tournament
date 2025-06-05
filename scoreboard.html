@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scoreboard</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="register.html">Register Teams</a> |
+      <a href="matches.html">Matches</a> |
+      <a href="scoreboard.html">Scoreboard</a>
+    </nav>
+    <h1>Round Robin Soccer Tournament</h1>
+
+    <h2>Scoreboard</h2>
+    <table id="scoreboard">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Played</th>
+          <th>Goal Wins</th>
+          <th>Corner Wins</th>
+          <th>Drawn</th>
+          <th>Lost</th>
+          <th>Goals For</th>
+          <th>Goals Against</th>
+          <th>Goal Difference</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Positions</h2>
+    <div id="positions"></div>
+
+    <h2>Final</h2>
+    <div id="final"></div>
+
+    <script src="js/script.js"></script>
+    <script>
+      $(document).ready(function () {
+        loadData();
+        updateScoreboard();
+        checkTournamentEnd();
+      });
+    </script>
+  </body>
+</html>
