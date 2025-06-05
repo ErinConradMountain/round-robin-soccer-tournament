@@ -1,0 +1,15 @@
+{
+  "name": "round-robin-soccer-tournament",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint js/*.js",
+    "format": "prettier -c ."
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  }
+}
