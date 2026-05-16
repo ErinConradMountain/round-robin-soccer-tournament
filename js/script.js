@@ -2,11 +2,30 @@ let teams = [];
 let matches = [];
 let scoreboard = {};
 
+function createInitialStats() {
+  return {
+    played: 0,
+    goalWins: 0,
+    cornerWins: 0,
+    drawn: 0,
+    lost: 0,
+    goalsFor: 0,
+    goalsAgainst: 0,
+    points: 0,
+  };
+}
+
 function loadData() {
-  const data = JSON.parse(localStorage.getItem("tournamentData")) || {};
+  let data = {};
+  try {
+    data = JSON.parse(localStorage.getItem("tournamentData")) || {};
+  } catch (error) {
+    data = {};
+  }
   teams = data.teams || [];
   matches = data.matches || [];
   scoreboard = data.scoreboard || {};
+  recalculateScoreboard();
 }
 
 function saveData() {
@@ -27,16 +46,7 @@ function addTeam() {
   const teamName = $("#teamName").val().trim();
   if (teamName && !teams.includes(teamName)) {
     teams.push(teamName);
-    scoreboard[teamName] = {
-      played: 0,
-      goalWins: 0,
-      cornerWins: 0,
-      drawn: 0,
-      lost: 0,
-      goalsFor: 0,
-      goalsAgainst: 0,
-      points: 0,
-    };
+    scoreboard[teamName] = createInitialStats();
     $("#teamName").val("");
     displayTeams();
     updateTeamFilter();
@@ -186,27 +196,6 @@ function updateMatch(index) {
 function updateMatchResult(index, goals1, corners1, goals2, corners2) {
   const match = matches[index];
 
-  if (match.played) {
-    updateTeamStats(
-      match.team1,
-      -match.goals1,
-      -match.goals2,
-      -match.corners1,
-      -match.corners2,
-      -match.points1,
-      true,
-    );
-    updateTeamStats(
-      match.team2,
-      -match.goals2,
-      -match.goals1,
-      -match.corners2,
-      -match.corners1,
-      -match.points2,
-      true,
-    );
-  }
-
   match.goals1 = goals1;
   match.corners1 = corners1;
   match.goals2 = goals2;
@@ -232,35 +221,15 @@ function updateMatchResult(index, goals1, corners1, goals2, corners2) {
     }
   }
 
-  updateTeamStats(
-    match.team1,
-    goals1,
-    goals2,
-    corners1,
-    corners2,
-    match.points1,
-  );
-  updateTeamStats(
-    match.team2,
-    goals2,
-    goals1,
-    corners2,
-    corners1,
-    match.points2,
-  );
+  recalculateScoreboard();
 }
 
-function updateTeamStats(
-  team,
-  goalsFor,
-  goalsAgainst,
-  corners,
-  opponentCorners,
-  points,
-  isEdit = false,
-) {
-  const stats = scoreboard[team];
-  if (!isEdit) stats.played += 1;
+function applyTeamStats(table, team, goalsFor, goalsAgainst, points) {
+  if (!table[team]) {
+    table[team] = createInitialStats();
+  }
+  const stats = table[team];
+  stats.played += 1;
   stats.goalsFor += goalsFor;
   stats.goalsAgainst += goalsAgainst;
   stats.points += points;
@@ -274,6 +243,42 @@ function updateTeamStats(
   } else {
     stats.drawn += 1;
   }
+}
+
+function recalculateScoreboard() {
+  const nextScoreboard = {};
+
+  teams.forEach((team) => {
+    nextScoreboard[team] = createInitialStats();
+  });
+
+  matches.forEach((match) => {
+    if (!match.played) return;
+
+    if (!nextScoreboard[match.team1]) {
+      nextScoreboard[match.team1] = createInitialStats();
+    }
+    if (!nextScoreboard[match.team2]) {
+      nextScoreboard[match.team2] = createInitialStats();
+    }
+
+    applyTeamStats(
+      nextScoreboard,
+      match.team1,
+      match.goals1,
+      match.goals2,
+      match.points1,
+    );
+    applyTeamStats(
+      nextScoreboard,
+      match.team2,
+      match.goals2,
+      match.goals1,
+      match.points2,
+    );
+  });
+
+  scoreboard = nextScoreboard;
 }
 
 function updateScoreboard() {
